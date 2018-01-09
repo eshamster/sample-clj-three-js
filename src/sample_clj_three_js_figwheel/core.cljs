@@ -7,6 +7,10 @@
 
 (defonce app-state (atom {:text "Hello world!"}))
 
+(defn update-mesh [mesh]
+  (aset mesh "rotation" "x" (+ 0.01 (.-x (.-rotation mesh))))
+  (aset mesh "rotation" "y" (+ 0.02 (.-y (.-rotation mesh)))))
+
 (defn init []
   (let [scene (js/THREE.Scene.)
         screen-width 500
@@ -31,7 +35,7 @@
     (.appendChild js/document.body (.-domElement renderer))
     ;; Kick off the animation loop updating
     (defn render []
-      (aset mesh "rotation" "y" (+ 0.01 (.-y (.-rotation mesh))))
+      (update-mesh mesh)
       (.render renderer scene p-camera))
 
     (defn animate []
@@ -40,7 +44,8 @@
 
     (animate)))
 
-(init)
+(defonce to-init-once
+  (atom (init)))
 
 (defn setup []
   (println "do setup"))
@@ -53,5 +58,4 @@
   ;; your application
   ;; (swap! app-state update-in [:__figwheel_counter] inc)
   (teardown)
-  (setup)
-)
+  (setup))

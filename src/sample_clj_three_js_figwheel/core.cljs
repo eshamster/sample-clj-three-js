@@ -15,11 +15,13 @@
 (defn update-mesh [mesh]
   (aset mesh "rotation" "x" (+ 0.01 (.-x (.-rotation mesh))))
   (aset mesh "rotation" "y" (+ 0.02 (.-y (.-rotation mesh))))
-  (when (= (mod @frame-counter 120) 0)
-    (let [mod-counter (mod @frame-counter 360)]
-      (cond (= mod-counter   0) (change-color mesh 0xff0000)
-            (= mod-counter 120) (change-color mesh 0x00ff00)
-            (= mod-counter 240) (change-color mesh 0x0000ff)))))
+  (let [color-list [0xff0000 0x00ff00 0xaaaaff]
+        interval 120]
+    (when (= (mod @frame-counter interval) 0)
+      (let [div (/ (mod @frame-counter
+                        (* interval (count color-list)))
+                   interval)]
+        (change-color mesh (nth color-list div))))))
 
 (defn update-camera [camera]
   (let [z (.-z (.-position camera))]

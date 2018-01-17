@@ -7,7 +7,14 @@ The sample-clj-three-js-figwheel is my first sample to use ClojureScript especia
 
 ## Hot loads demo
 
-***WIP***
+Basic movement: There is only a cube. It rotates and changes its color. Then, 3D camera go far from the cube.
+(Note: The frame rate of the folloging gif is 15FPS, but actual rate is 60FPS.)
+
+<img alt="Basic movement" src="https://raw.githubusercontent.com/wiki/eshamster/sample-clj-three-js/images/basic.gif" height="300px">
+
+- [Demo1: Change rotation speed (gif)](https://raw.githubusercontent.com/wiki/eshamster/sample-clj-three-js/images/change_speed.gif)
+- [Demo2: Change color changer (gif)](https://raw.githubusercontent.com/wiki/eshamster/sample-clj-three-js/images/change_color.gif)
+- [Demo3: Change camera movement (gif)](https://raw.githubusercontent.com/wiki/eshamster/sample-clj-three-js/images/change_camera.gif)
 
 ## Setup
 

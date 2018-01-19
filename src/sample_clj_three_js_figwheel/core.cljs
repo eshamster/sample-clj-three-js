@@ -10,8 +10,8 @@
   (aset mesh "material" "needsUpdate" true))
 
 (defn update-mesh [mesh]
-  (aset mesh "rotation" "x" (+ 0.01 (.-x (.-rotation mesh))))
-  (aset mesh "rotation" "y" (+ 0.02 (.-y (.-rotation mesh))))
+  (aset mesh "rotation" "x" (- (.-x (.-rotation mesh)) 0.001))
+  (aset mesh "rotation" "z" (- (.-z (.-rotation mesh)) 0.02))
   (let [color-list [0xff0000 0x00ff00 0xaaaaff]
         interval 120]
     (when (= (mod @frame-counter interval) 0)
@@ -23,7 +23,7 @@
 (defn update-camera [camera]
   (let [z (.-z (.-position camera))]
     (when (< z 1000)
-      (aset camera "position" "z" (+ 0.1 z)))))
+      (aset camera "position" "z" (+ 0.4 z)))))
 
 (defn update-others []
   (swap! frame-counter #(+ % 1)))
@@ -43,7 +43,7 @@
     ;; Change the starting position of cube and camera
     (aset p-camera "name" "p-camera")
     (aset p-camera "position" "z" 500)
-    (aset mesh "rotation" "x" 45)
+    (aset mesh "rotation" "x" -20)
     (aset mesh "rotation" "y" 0)
     (.setSize renderer screen-width screen-height)
     ;; Add camera, mesh and box to scene and then that to DOM node.
